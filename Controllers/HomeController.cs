@@ -21,10 +21,12 @@ namespace Spinutech.Controllers
     public class HomeController : Controller
     {
         private readonly IRankService _rankService;
+        private readonly ICardService _cardService;
 
-        public HomeController(IRankService rankService)
+        public HomeController(IRankService rankService, ICardService cardService)
         {
             _rankService = rankService;
+            _cardService = cardService;
         }
 
         /// <summary>
@@ -38,7 +40,7 @@ namespace Spinutech.Controllers
 
         public IActionResult Index(List<Card> hand)
         {
-            if (hand.Count == 5)
+            if (_cardService.IsValidHand(hand))
             {
                 var model = new ResultsViewModel
                 {

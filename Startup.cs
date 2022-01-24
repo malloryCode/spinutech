@@ -28,6 +28,7 @@ namespace Spinutech
         {
             services.AddRazorPages();
             services.AddTransient<IRankService, RankService>();
+            services.AddTransient<ICardService, CardService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
