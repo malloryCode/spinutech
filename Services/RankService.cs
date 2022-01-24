@@ -101,13 +101,25 @@ namespace Spinutech.Services
         private int MatchCountMax(List<Card> cards)
         {
             var matches = cards.GroupBy(x => x.Value);
-            return matches.First().Count();
+            return matches.Max(x => x.Count());
         }
 
+        /// <summary>
+        /// Returns the minimum number of cards of the same value
+        /// (but greater than 1)
+        /// </summary>
+        /// <param name="cards"></param>
+        /// <returns></returns>
         private int MatchCountMin(List<Card> cards)
         {
             var matches = cards.GroupBy(x => x.Value);
-            return matches.ElementAt(2).Count();
+            if (matches.Count() == 1)
+            {
+                return 1;
+            }
+            // high to low, and skip high
+            var orderedMatches = matches.OrderByDescending( x => x.Count());
+            return orderedMatches.ElementAt(1).Count();
         }
     }
 }

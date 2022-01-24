@@ -1,6 +1,7 @@
 ﻿using Spinutech.Models;
 
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Spinutech.Services
 {
@@ -14,17 +15,18 @@ namespace Spinutech.Services
         /// <returns></returns>
         public bool IsValidHand(Hand hand)
         {
-            if (hand.Cards.Count != 5)
+            if (hand.Cards.Count(x => x != null) != 5)
             {
                 return false;
             }
 
-            HashSet<Card> cards = new HashSet<Card>();
+            HashSet<string> cards = new HashSet<string>();
 
             foreach (var card in hand.Cards)
             {
+                var cardString = card.Suit.ToString() + card.Value.ToString();
                 // if already present, Add returns false
-                if (!cards.Add(card))
+                if (cards.Add(cardString))
                 {
                     return false;
                 }

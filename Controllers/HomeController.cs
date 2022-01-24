@@ -72,7 +72,7 @@ namespace Spinutech.Controllers
                 var model = new IndexViewModel
                 {
                     Deck = deckOfCards.GetFullDeck,
-                    Hand = hand
+                    Hand = new Hand() // reset to 5 empty cards
                 };
                 return View("Index", model);
             }

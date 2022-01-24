@@ -2,28 +2,32 @@
 @model IndexViewModel;
 
 <form action="Home/Index" method="POST">
-    <h2>
-        Poker Hand Ranker
-    </h2>
+    <div class="hand-selector">
+        <h2>
+            Poker Hand Ranker
+        </h2>
+        <p>
+            @Html.ValidationSummary(true)
+        </p>
+        <p>Put together a hand by selecting 5 distinct cards</p>
 
-    <p>Put together a hand by selecting 5 distinct cards</p>
+        <ul class="cards">
+            @for (int i = 0; i < 5; i++){
+                <li>
+                    <label for="@Model.Hand.Cards[i]" class="form-label">Card @($"{i+1}")</label>
+                    <select name="@Model.Hand.Cards[i]" class="form-control ">
+                        <option value="">Please Select</option>
+                        @foreach(Card card in Model.Deck)
+                        {
+                            <option value="@($"{card.Suit},{card.Value}")">@($"{@card.Value} of {@card.Suit}")</option>
+                        }
+                    </select>
+                </li>
+             }
+        </ul>
 
-    <ul class="cards">
-        @for (int i = 0; i < 5; i++){
-            <li>
-                <label for="@Model.Hand.Cards[i]" class="form-label">Card @($"{i+1}")</label>
-                <select name="@Model.Hand.Cards[i]" class="form-control ">
-                    <option value="">Please Select</option>
-                    @foreach(Card card in Model.Deck)
-                    {
-                        <option value="@($"{card.Suit},{card.Value}")">@($"{@card.Value} of {@card.Suit}")</option>
-                    }
-                </select>
-            </li>
-         }
-    </ul>
-
-    <p>
-       <input type="submit" vale="See your hand's rank" />
-    </p>
+        <p>
+           <input type="submit" vale="See your hand's rank" />
+        </p>
+    </div>
 </form>

@@ -9,10 +9,7 @@
 }
 <div class="results">
     <h1>Results</h1>
-    <p>
-        @Html.ValidationSummary(true)
-    </p>
-    
+
     <h5>Your Hand</h5>
     <ul class="hand">
         @foreach(var card in Model.Hand.Cards)
@@ -24,7 +21,7 @@
     </ul>
 
     <h5>Your Hands Rank</h5>
-    <ul>
+    <ol>
         @foreach(var rank in allRanks)
         {
             var rankDescription = EnumHelpers.GetAttributeOfType<DisplayAttribute>(rank);
@@ -38,5 +35,5 @@
                 <li class="rank rank-@(rank.ToString().ToLower())">@rankDescription.Name</li>
             }
         }
-    </ul>
-</div>>
+    </ol>
+</div>
