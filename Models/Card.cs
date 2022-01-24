@@ -1,4 +1,8 @@
-﻿namespace Spinutech.Models
+﻿using Microsoft.AspNetCore.Mvc;
+
+using Spinutech.Helpers;
+
+namespace Spinutech.Models
 {
     public class Card
     {

@@ -12,16 +12,16 @@ namespace Spinutech.Services
         /// </summary>
         /// <param name="hand"></param>
         /// <returns></returns>
-        public bool IsValidHand(List<Card> hand)
+        public bool IsValidHand(Hand hand)
         {
-            if (hand.Count != 5)
+            if (hand.Cards.Count != 5)
             {
                 return false;
             }
 
             HashSet<Card> cards = new HashSet<Card>();
 
-            foreach (var card in hand)
+            foreach (var card in hand.Cards)
             {
                 // if already present, Add returns false
                 if (!cards.Add(card))

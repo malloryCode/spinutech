@@ -35,10 +35,24 @@ namespace Spinutech.Controllers
         /// <returns></returns>
         public IActionResult Index()
         {
-            return View();
+            var deckOfCards = new Deck();
+            var hand = new Hand();
+
+            var model = new IndexViewModel {
+                Deck = deckOfCards.GetFullDeck,
+                Hand = hand
+            };
+        
+            return View(model);
         }
 
-        public IActionResult Index(List<Card> hand)
+        /// <summary>
+        /// Process poker hand and display hand rank to user
+        /// </summary>
+        /// <param name="hand"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public IActionResult Index([ModelBinder(Name = "Spinutech.Models.Card")] Hand hand)
         {
             if (_cardService.IsValidHand(hand))
             {
@@ -53,7 +67,14 @@ namespace Spinutech.Controllers
             else
             {
                 // not valid hand
-                return View(hand);
+                ModelState.AddModelError(string.Empty, "Invalid hand. Make sure you selected 5 cards and they are all distinct.");
+                var deckOfCards = new Deck();
+                var model = new IndexViewModel
+                {
+                    Deck = deckOfCards.GetFullDeck,
+                    Hand = hand
+                };
+                return View("Index", model);
             }
         }
     }

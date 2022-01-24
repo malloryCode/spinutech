@@ -6,6 +6,6 @@ namespace Spinutech.Services
 {
     public interface IRankService
     {
-        Rank GetRank(List<Card> hand);
+        Rank GetRank(Hand hand);
     }
 }

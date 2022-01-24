@@ -9,10 +9,13 @@
 }
 <div class="results">
     <h1>Results</h1>
-
+    <p>
+        @Html.ValidationSummary(true)
+    </p>
+    
     <h5>Your Hand</h5>
     <ul class="hand">
-        @foreach(var card in Model.Hand)
+        @foreach(var card in Model.Hand.Cards)
         {
             <li>
                 @($"{card.Value} of {card.Suit}")
@@ -28,11 +31,11 @@
 
             if(rank == Model.Rank)
             {
-                <li class="rank rank-@(rank.ToString().ToLower()) active">@rankDescription</li>
+                <li class="rank rank-@(rank.ToString().ToLower()) active">@rankDescription.Name</li>
             }
             else
             {
-                <li class="rank rank-@(rank.ToString().ToLower())">@rankDescription</li>
+                <li class="rank rank-@(rank.ToString().ToLower())">@rankDescription.Name</li>
             }
         }
     </ul>

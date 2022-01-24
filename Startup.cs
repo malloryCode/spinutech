@@ -5,6 +5,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
+using Spinutech.Binders;
 using Spinutech.Services;
 
 using System;
@@ -29,6 +30,11 @@ namespace Spinutech
             services.AddRazorPages();
             services.AddTransient<IRankService, RankService>();
             services.AddTransient<ICardService, CardService>();
+
+            services.AddControllers(options =>
+            {
+                options.ModelBinderProviders.Insert(0, new HandTypeBinderProvider());
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
