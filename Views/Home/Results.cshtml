@@ -1,0 +1,39 @@
+﻿@using Spinutech.Models;
+@using Spinutech.Helpers;
+@using System.ComponentModel.DataAnnotations
+
+@model ResultsViewModel
+
+@{
+    var allRanks = Enum.GetValues<Rank>().ToList();
+}
+<div class="results">
+    <h1>Results</h1>
+
+    <h5>Your Hand</h5>
+    <ul class="hand">
+        @foreach(var card in Model.Hand)
+        {
+            <li>
+                @($"{card.Value} of {card.Suit}")
+            </li>
+        }
+    </ul>
+
+    <h5>Your Hands Rank</h5>
+    <ul>
+        @foreach(var rank in allRanks)
+        {
+            var rankDescription = EnumHelpers.GetAttributeOfType<DisplayAttribute>(rank);
+
+            if(rank == Model.Rank)
+            {
+                <li class="rank rank-@(rank.ToString().ToLower()) active">@rankDescription</li>
+            }
+            else
+            {
+                <li class="rank rank-@(rank.ToString().ToLower())">@rankDescription</li>
+            }
+        }
+    </ul>
+</div>>

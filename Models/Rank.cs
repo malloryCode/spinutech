@@ -4,7 +4,7 @@ namespace Spinutech.Models
 {
     public enum Rank
     {
-        [Display( Name = "Royal Flush")]RoyalFlush,
+        [Display(Name = "Royal Flush")]RoyalFlush,
         [Display(Name = "Straight Flush")] StraightFlush,
         [Display(Name = "Four Of A Kind")] FourOfAKind,
         [Display(Name = "Full House")] FullHouse,
